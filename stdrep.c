@@ -2,10 +2,6 @@
 #include <stdlib.h>
 
 
-int *neighbor(int* s);
-
-
-
 int *gen_rand_std(int n)
 {
   //generate n (100) random plus or minus 1s
@@ -32,3 +28,4 @@ int *neighbor(int* s)
  //output modified s
  return s;
 }
+
