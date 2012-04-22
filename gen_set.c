@@ -24,7 +24,7 @@ main(int argc, char *argv[])
   srand(time(NULL));
   if (argc!=2)
   {
-    printf("Usage: ./stdrep (size of set)\n");
+    printf("Usage: ./gen_set (size of set)\n");
     return 1;
   }
   int n = atoi(argv[1]);
@@ -33,7 +33,7 @@ main(int argc, char *argv[])
   for (j=0;j<n;j++)
   {
     big num = r();
-    fprintf(fp,"%llu\n",&num);
+    fprintf(fp,"%llu\n",num);
   }
   fclose(fp);
   return 0;
