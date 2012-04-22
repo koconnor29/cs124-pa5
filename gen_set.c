@@ -2,10 +2,22 @@
 #include<stdlib.h>
 #include<time.h>
 
-#define big unsigned long long
+#define big long long
 
-big r(void);
+big r()
+{
+  big x = 0;
+  int i;
+  for (i=0;i<12;i++)
+  {
+    x*=10;
+    x+=rand()%10;
+  }
 
+  return x;
+}
+
+/*
 int
 main(int argc, char *argv[])
 {
@@ -26,18 +38,5 @@ main(int argc, char *argv[])
   fclose(fp);
   return 0;
 }
+*/
 
-
-big r()
-{
-  big x = 0;
-  int i;
-  for (i=0;i<12;i++)
-  {
-    x*=10;
-    x+=rand()%10;
-    x*=10;
-  }
-
-  return x;
-}

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int *gen_rand_std(int n)
+int *gen_rand_alt(int n)
 {
   srand(time(NULL));
   int *s = malloc(n*sizeof(int));
