@@ -71,7 +71,7 @@ main(int argc, char *argv[])
            t = s;
 	   residue = r;
 	 }
-         else if(flag == 2 && chance(r, residue, i) == 1;) //for simulated annealing
+         else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
 	 {
            t = s;   //if we hit the required probability, via chance(), replace t with s anyways
 	 }
