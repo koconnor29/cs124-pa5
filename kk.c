@@ -100,10 +100,13 @@ big compute_res(int *t,big *list)
 int chance(int r, int residue, int i)
 {
   //calculate our cutoff probability, blindly following the suggestion in the assignment
-  float t = 10; //TBCOMpleted 
+  float t = pow(10,10)*pow(0.8, floor(i/300)); //TBCOMpleted 
   float cutoff = exp((residue - r)/t);
   //calculate a random number between 0 and 1
+  float x = (float) rand()/RAND_MAX;
 
+  if(x < cutoff){ return 1;}
+  else return 0;
 }
 
 
