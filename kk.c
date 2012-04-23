@@ -12,7 +12,8 @@ int
 main(int argc, char *argv[])
 {
   srand(time(NULL));
-  // filename stuff here
+  char *filename = argv[1];
+  FILE *fp = fopen(filename)
 
   int i,j;
   big *list = malloc(100*sizeof(big)); // list of numbers we are passed
