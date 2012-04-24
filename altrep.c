@@ -16,7 +16,32 @@ int *gen_rand_alt(int n)
   return s;
 }
 
+big *preprocess(int *partitionnumbers, big *list)
+{
 
+  //list goes from 0 to 100, we want preprocess to as well, int goes from 0 to 100
+  int i;
+  int j;
+
+  big *glued = malloc(100*sizeof(big));
+
+  //initialize to zero
+  for(i= 0; i < 100; i++)
+  {
+     glued[i] = 0;
+  }
+
+  for(i = 0; i < 100; i++)
+  {
+  
+    j = partitionnumbers[i];
+    glued[j] += list[i];
+
+  }  
+
+  return glued;
+
+}
 
 
 //Binary Heap Stuff
