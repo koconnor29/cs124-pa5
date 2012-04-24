@@ -4,7 +4,7 @@
 #include "kk_helper.h"
 #include <math.h>
 
-#define max_iter 2
+#define max_iter 25000
 
 big compute_res(int *t, big* list);
 
