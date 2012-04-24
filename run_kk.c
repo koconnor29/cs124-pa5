@@ -26,6 +26,7 @@ big run_kk(big *list, int flag, int rep)
 	if (r<residue)
 	{
 	  residue = r;
+	  printf("%llu\n",residue);
 	}
 	free(t);
       }
@@ -43,7 +44,7 @@ big run_kk(big *list, int flag, int rep)
        {
          //create a neighbor of t and calculate its residue
          int *s =  neighbor(t);
-	 big r = compute_res(t, list);
+	 big r = compute_res(s, list);
 
          //if it's lower, replace s with t and swtich the residues
 	 if(r<residue)
@@ -51,6 +52,7 @@ big run_kk(big *list, int flag, int rep)
            free(t);
 	   t = s;
 	   residue = r;
+	   printf("%llu\n",residue);
 	 }
          else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
 	 {

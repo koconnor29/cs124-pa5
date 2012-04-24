@@ -28,10 +28,10 @@ int *neighbor(int* s)
 
  //choose two random indices between 0 and  100
  i = rand() % 100;
- j = rand() % 100;
+ j = (i+1+rand() % 99)%100;
 
  //switch s[i], s[j] with probability 1/2
- new[i]*= (2*(rand() % 2) - 1); 
+ new[i]*= (- 1); 
  new[j]*= (2*(rand() % 2) - 1); 
  
  //output modified s
