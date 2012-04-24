@@ -7,7 +7,6 @@
 #define big long long
 int *gen_rand_alt(int n)
 {
-  srand(time(NULL));
   int *s = malloc(n*sizeof(int));
   int i;
   for (i=0;i<n;i++)
@@ -42,6 +41,30 @@ big *preprocess(int *partitionnumbers, big *list)
   return glued;
 
 }
+
+
+int *altneighbor(int *s){
+
+int *new = malloc(100*sizeof(int));
+
+//copy s
+int i;
+for(i = 0; i < 100; i++)
+  new[i] = s[i];
+
+//choose a random position
+int pos = rand() % 100;
+
+//choose a random perturbation
+int perturb = (rand() % 99) + 1;
+
+new[pos] = (new[pos] +  perturb) % 100;
+
+return new;
+
+}
+
+
 
 
 //Binary Heap Stuff

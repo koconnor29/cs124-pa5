@@ -48,16 +48,23 @@ big run_kk(big *list, int flag, int rep)
          //if it's lower, replace s with t and swtich the residues
 	 if(r<residue)
 	 {
-           t = s;
+           free(t);
+	   t = s;
 	   residue = r;
 	 }
          else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
 	 {
-           t = s;
+           free(t);
+	   t = s;
 	   //if we hit the required probability, via chance(), 
 	   //replace t with s anyways
 	 }
+	 else
+	 {
+	   free(s);
+	 }//we don't switch
        }
+       free(t);
     }
   }
 
@@ -66,18 +73,48 @@ big run_kk(big *list, int flag, int rep)
     if (flag == 0)
     {
       int *t = gen_rand_alt(100);
-      for (i=0;i<100;i++)
+      big *processed = preprocess(t,list);
+      residue = kar(processed);
+      free(t);
+    }
+    else
+    {
+      int *t = gen_rand_alt(100);
+      big *processed = preprocess(t, list);
+      residue = kar(processed);
+
+      for(i = 0; i < max_iter; i++)
       {
-        
+         //perturb our position in solution space
+	 int *s = altneighbor(t);
+	 big *newprocessed = preprocess(s, list);
+	 big r = kar(newprocessed);
+	 
+         //if it's lower, replace s with t and swtich the residues
+	 if(r<residue)
+	 {
+           free(t);
+	   t = s;
+	   residue = r;
+	 }
+         else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
+	 {
+           free(t);
+	   t = s;
+	   //if we hit the required probability, via chance(), 
+	   //replace t with s anyways
+	 }
+	 else
+	 {
+	   free(s);
+	 }//we don't switch
       }
+      free(t);
     }
   }
 
 
-
-  free(list);
-  printf("min residue: %llu\n",residue);
-  return 0;
+  return residue;
 }
 
 big compute_res(int *t,big *list)
