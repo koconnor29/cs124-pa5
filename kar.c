@@ -12,7 +12,7 @@ big kar(big *list)
   }
 
   int size = 100;
-  while (size > 0)
+  while (size > 1)
   {
     q = Heap_Extract_Max(q,size);
     q = Heap_Extract_Max(q,size-1);
@@ -20,6 +20,7 @@ big kar(big *list)
     q = Max_Heap_Insert(q,diff,size-2);
     size--;
   }
-
+  big res = q[1];
+  free(q);
   return q[1];
 }
