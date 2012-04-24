@@ -1,117 +1,87 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "helper.h"
 #include <math.h>
 
 #define max_iter 2
+#define big long long
 
-big compute_res(int *t, big* list);
+big run_kk(big* list,int flag, int rep);
+big *gen(int n);
 
 int
 main(int argc, char *argv[])
 {
   srand(time(NULL));
   int i,j;
-/*  char *filename = argv[1];
-  FILE *fp = fopen(filename,"r");
-  big *list = malloc(100*sizeof(big)); // list of numbers we are passed
-  for (i=0;i<100;i++)
+
+  big result;
+
+  if (argc!=2 && argc!=4)
   {
-    fscanf(fp,"%ll\n",&list[i]);
+    printf("Usage: ./kk filename [mode] [rep]");
+    return 1;
   }
-*/
-
-  big *list = malloc(100*sizeof(big));
-  for (i=0;i<100;i++)
-    list[i] = r();
-
+  
   int flag = 0;
   int rep = 0;
-  if (argc==4)
+  big *list;
+  if (argc==2)
   {
-    flag = atoi(argv[2]);
-    rep = atoi(argv[3]);
+    list = malloc(100*sizeof(big));
+    char *filename = argv[1];
+    FILE *fp = fopen(filename,"r");
+    for (i=0;i<100;i++)
+    {
+      fscanf(fp,"%llu\n",&list[i]);
+    }
+
+    result = run_kk(list,flag,rep);
+    free(list);
+    printf("Residue: %llu\n",result);
   }
 
-  big residue = (1<<30);
-  residue*=residue;
-  // repeated random
-  if (flag == 0)
+  if (argc==3)
   {
-    if (rep==0)
+    big res[6];
+    for (i=0;i<6;i++)
+      res[i] = 0;
+    for(i=0;i<50;i++)
     {
-      
-      for (i=0;i<max_iter;i++)
+      list = gen(100);
+      for (flag=0;flag<2;flag++)
       {
-        int *t = gen_rand_std(100);
-	big r = compute_res(t,list);
-	if (r<residue)
+        for (rep=0;rep<1;rep++)
 	{
-	  residue = r;
+	  res[3*rep+flag]+=run_kk(list,flag,rep);
 	}
-	free(t);
       }
     }
+    for (i=0;i<6;i++)
+      res[i] = res[i]/50;
 
+
+    printf("Rep: std, Mode: rep. rand. --> avg. result: %llu\n",res[0]);
+    printf("Rep: std, Mode: hill climb --> avg. result: %llu\n",res[1]);
+    printf("Rep: std, Mode: sim. anneal --> avg. result: %llu\n",res[2]);
+    printf("Rep: alt, Mode: rep. rand. --> avg. result: %llu\n",res[3]);
+    printf("Rep: alt, Mode: hill climb --> avg. result: %llu\n",res[4]);
+    printf("Rep: alt, Mode: sim. anneal --> avg. result: %llu\n",res[5]);
   }
-  else  //hill climbing, simulated annealing
+
+
+  if (argc==4)
   {
-    if (rep == 0)
-    {
-       //generate a single random collection of signs
-       int *t = gen_rand_std(100);
-       residue = compute_res(t, list);
-       for (i = 0; i < max_iter; i++)
-       {
-         //create a neighbor of t and calculate its residue
-         int *s =  neighbor(t);
-	 big r = compute_res(t, list);
+    list = gen(100);
 
-         //if it's lower, replace s with t and swtich the residues
-	 if(r<residue)
-	 {
-           t = s;
-	   residue = r;
-	 }
-         else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
-	 {
-           t = s;   //if we hit the required probability, via chance(), replace t with s anyways
-	 }
-       }
-    }
+    flag = atoi(argv[2]);
+    rep = atoi(argv[3]);
+
+    result = run_kk(list,flag,rep);
+    printf("Residue: %llu\n",result);
+    free(list);
   }
-  free(list);
-  printf("min residue: %llu\n",residue);
+
   return 0;
+
 }
-
-big compute_res(int *t,big *list)
-{
-  int i;
-  long long sum = 0;
-  for (i=0;i<100;i++)
-  {
-    sum+= t[i]*list[i];
-  }
-
-  if (sum<0)
-    sum*=-1;
-
-  return sum;
-}
-
-int chance(int r, int residue, int i)
-{
-  //calculate our cutoff probability, blindly following the suggestion in the assignment
-  float t = pow(10,10)*pow(0.8, floor(i/300)); //TBCOMpleted 
-  float cutoff = exp((residue - r)/t);
-  //calculate a random number between 0 and 1
-  float x = (float) rand()/RAND_MAX;
-
-  if(x < cutoff){ return 1;}
-  else return 0;
-}
-
-
-

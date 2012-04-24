@@ -3,21 +3,8 @@
 #include<time.h>
 
 #define big long long
+big *gen(int n);
 
-big r()
-{
-  big x = 0;
-  int i;
-  for (i=0;i<12;i++)
-  {
-    x*=10;
-    x+=rand()%10;
-  }
-
-  return x;
-}
-
-/*
 int
 main(int argc, char *argv[])
 {
@@ -27,16 +14,15 @@ main(int argc, char *argv[])
     printf("Usage: ./gen_set (size of set)\n");
     return 1;
   }
+
   int n = atoi(argv[1]);
-  int i,j;
+  int j;
+  big *list = gen(n);
   FILE *fp = fopen("set.txt","w");
   for (j=0;j<n;j++)
-  {
-    big num = r();
-    fprintf(fp,"%ll\n",num);
-  }
+    fprintf(fp,"%llu\n",list[j]);
+ 
+  free(list);
   fclose(fp);
   return 0;
 }
-*/
-
