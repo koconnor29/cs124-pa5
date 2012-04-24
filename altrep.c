@@ -53,7 +53,7 @@ int *Max_Heapify(int *A, int i, int heapsize)
   }
   else{largest = i;}
   
-  if( r <= heapsize && A[r] > A[i] )
+  if( r <= heapsize && A[r] > A[largest] )
   {
     largest = r;
   }
