@@ -17,7 +17,7 @@ main(int argc, char *argv[])
 
   big result;
 
-  if (argc!=2 && argc!=4)
+  if (argc!=2 && argc!=3 && argc!=4)
   {
     printf("Usage: ./kk filename [mode] [rep]");
     return 1;

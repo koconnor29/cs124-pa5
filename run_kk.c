@@ -60,6 +60,21 @@ big run_kk(big *list, int flag, int rep)
        }
     }
   }
+
+  if (rep==1)
+  {
+    if (flag == 0)
+    {
+      int *t = gen_rand_alt(100);
+      for (i=0;i<100;i++)
+      {
+        
+      }
+    }
+  }
+
+
+
   free(list);
   printf("min residue: %llu\n",residue);
   return 0;
