@@ -66,18 +66,16 @@ big run_kk(big *list, int flag, int rep)
     if (flag == 0)
     {
       int *t = gen_rand_alt(100);
-      for (i=0;i<100;i++)
-      {
-        
-      }
+      big *processed = preprocess(t,list);
+      residue = kar(processed);
     }
+
   }
 
 
-
   free(list);
-  printf("min residue: %llu\n",residue);
-  return 0;
+  
+  return residue;
 }
 
 big compute_res(int *t,big *list)
