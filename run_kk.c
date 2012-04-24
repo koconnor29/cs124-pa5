@@ -18,7 +18,6 @@ big run_kk(big *list, int flag, int rep)
   {
     if (rep==0)
     {
-      
       for (i=0;i<max_iter;i++)
       {
         int *t = gen_rand_std(100);
@@ -26,7 +25,6 @@ big run_kk(big *list, int flag, int rep)
 	if (r<residue)
 	{
 	  residue = r;
-	  printf("%llu\n",residue);
 	}
 	free(t);
       }
@@ -52,7 +50,6 @@ big run_kk(big *list, int flag, int rep)
            free(t);
 	   t = s;
 	   residue = r;
-	   printf("%llu\n",residue);
 	 }
          else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
 	 {
@@ -74,10 +71,15 @@ big run_kk(big *list, int flag, int rep)
   {
     if (flag == 0)
     {
-      int *t = gen_rand_alt(100);
-      big *processed = preprocess(t,list);
-      residue = kar(processed);
-      free(t);
+      for (i=0;i<max_iter;i++)
+      {
+        int *t = gen_rand_alt(100);
+        big *processed = preprocess(t,list);
+        big r = kar(processed);
+	if (r<residue)
+	  residue = r;
+        free(t);
+      }
     }
     else
     {
