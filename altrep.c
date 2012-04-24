@@ -29,16 +29,14 @@ return i/2; //we actually return floor i/2
 //Returns left child
 int Left(int i){
 
-if(i == 0){ return 1; }
-else{
 return 2*i;
-}
+
 }
 
 //Returns right child
 int Right(int i){
 
-return 2*i+1;
+return 2*i+1; 
 
 }
 
@@ -80,16 +78,16 @@ int *Max_Heapify(int *A, int i, int heapsize)
 
 int *Heap_Extract_Max(int *A, int heapsize)
 {
- int max = A[0];
+ int max = A[1];
 
- A[0] = A[heapsize - 1]; 
+ A[1] = A[heapsize]; 
  //cheat and store the max value in the now empty last spot
- A[heapsize - 1] = max;
+ A[heapsize] = max;
 
 
  heapsize--;
 
- Max_Heapify(A, 0, heapsize);
+ Max_Heapify(A, 1, heapsize);
  
  return A;
 }
@@ -100,7 +98,7 @@ int *Heap_Increase_Key(int *A, int i, int key){
 
   A[i] = key;
 
-  while(i > 0 && A[Parent(i)] < A[i])
+  while(i > 1 && A[Parent(i)] < A[i])
   {
   //exchange A[i], and A[parent(i)]
   int temp = A[i];
@@ -121,10 +119,10 @@ int *Max_Heap_Insert(int *A, int key, int heapsize)
 //REMEMBER TO MANUALLY TOGGLE HEAPSIZES!!!!
 
 //add in one last element to the heap with value key
-A[heapsize] = key;
+A[heapsize+1] = key;
 
 //let it float up the heap appropriately
-return Heap_Increase_Key(A, heapsize, key);
+return Heap_Increase_Key(A, heapsize+1, key);
 
 }
 
