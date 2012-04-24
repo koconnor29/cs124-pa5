@@ -6,3 +6,4 @@ int *gen_rand_std(int n);
 big r(void);
 big *gen(int n);
 big kar(big *list);
+big *preprocess(int *partitionnumbers, big *list);
