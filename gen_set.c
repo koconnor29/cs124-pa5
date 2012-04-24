@@ -33,7 +33,7 @@ main(int argc, char *argv[])
   for (j=0;j<n;j++)
   {
     big num = r();
-    fprintf(fp,"%llu\n",num);
+    fprintf(fp,"%ll\n",num);
   }
   fclose(fp);
   return 0;

@@ -12,16 +12,19 @@ int
 main(int argc, char *argv[])
 {
   srand(time(NULL));
-  char *filename = argv[1];
-  FILE *fp = fopen(filename)
-
   int i,j;
+/*  char *filename = argv[1];
+  FILE *fp = fopen(filename,"r");
   big *list = malloc(100*sizeof(big)); // list of numbers we are passed
   for (i=0;i<100;i++)
   {
-    list[i] = r();
+    fscanf(fp,"%ll\n",&list[i]);
   }
+*/
 
+  big *list = malloc(100*sizeof(big));
+  for (i=0;i<100;i++)
+    list[i] = r();
 
   int flag = 0;
   int rep = 0;
