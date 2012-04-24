@@ -29,8 +29,10 @@ return i/2; //we actually return floor i/2
 //Returns left child
 int Left(int i){
 
+if(i == 0){ return 1; }
+else{
 return 2*i;
-
+}
 }
 
 //Returns right child
