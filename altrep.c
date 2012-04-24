@@ -3,6 +3,8 @@
 #include <time.h>
 #include <math.h>
 
+
+#define big long long
 int *gen_rand_alt(int n)
 {
   srand(time(NULL));
@@ -13,6 +15,8 @@ int *gen_rand_alt(int n)
 
   return s;
 }
+
+
 
 
 //Binary Heap Stuff
@@ -40,7 +44,7 @@ return 2*i+1;
 
 }
 
-int *Max_Heapify(int *A, int i, int heapsize)
+big *Max_Heapify(big *A, int i, int heapsize)
 {
 
   int l = Left(i);
@@ -66,7 +70,7 @@ int *Max_Heapify(int *A, int i, int heapsize)
   else
   {
   //exchange A[i] and A[largest]
-  int temp = A[i];
+  big temp = A[i];
   A[i] = A[largest];
   A[largest] = temp;
 
@@ -76,9 +80,9 @@ int *Max_Heapify(int *A, int i, int heapsize)
 }
 
 
-int *Heap_Extract_Max(int *A, int heapsize)
+big *Heap_Extract_Max(big *A, int heapsize)
 {
- int max = A[1];
+ big max = A[1];
 
  A[1] = A[heapsize]; 
  //cheat and store the max value in the now empty last spot
@@ -94,14 +98,14 @@ int *Heap_Extract_Max(int *A, int heapsize)
 //remember to fucking manually decrement heapsize dude!
 
 
-int *Heap_Increase_Key(int *A, int i, int key){
+big *Heap_Increase_Key(big *A, int i, big key){
 
   A[i] = key;
 
   while(i > 1 && A[Parent(i)] < A[i])
   {
   //exchange A[i], and A[parent(i)]
-  int temp = A[i];
+  big temp = A[i];
   A[i] = A[Parent(i)];
   A[Parent(i)] = temp;
   
@@ -114,7 +118,7 @@ int *Heap_Increase_Key(int *A, int i, int key){
 } 
 
 
-int *Max_Heap_Insert(int *A, int key, int heapsize)
+big *Max_Heap_Insert(big *A, big key, int heapsize)
 {
 //REMEMBER TO MANUALLY TOGGLE HEAPSIZES!!!!
 
