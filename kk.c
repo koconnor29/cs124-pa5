@@ -7,7 +7,7 @@
 #define big long long
 
 big run_kk(big* list,int flag, int rep);
-big *gen(int n);
+big *gen(big *list, int n);
 
 int
 main(int argc, char *argv[])
@@ -37,7 +37,6 @@ main(int argc, char *argv[])
     }
 
     result = run_kk(list,flag,rep);
-    free(list);
     printf("Residue: %llu\n",result);
   }
 
@@ -46,12 +45,14 @@ main(int argc, char *argv[])
     big res[6];
     for (i=0;i<6;i++)
       res[i] = 0;
+
+    list = malloc(100*sizeof(big));
     for(i=0;i<50;i++)
     {
-      list = gen(100);
-      for (flag=0;flag<2;flag++)
+      gen(list,100);
+      for (flag=0;flag<3;flag++)
       {
-        for (rep=0;rep<1;rep++)
+        for (rep=0;rep<2;rep++)
 	{
 	  res[3*rep+flag]+=run_kk(list,flag,rep);
 	}
@@ -72,16 +73,16 @@ main(int argc, char *argv[])
 
   if (argc==4)
   {
-    list = gen(100);
+    list = malloc(100*sizeof(big));
+    gen(list,100);
 
     flag = atoi(argv[2]);
     rep = atoi(argv[3]);
 
     result = run_kk(list,flag,rep);
     printf("Residue: %llu\n",result);
-    free(list);
   }
-
+  free(list);
   return 0;
 
 }

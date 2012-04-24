@@ -7,7 +7,6 @@
 #define big long long
 int *gen_rand_alt(int n)
 {
-  srand(time(NULL));
   int *s = malloc(n*sizeof(int));
   int i;
   for (i=0;i<n;i++)
