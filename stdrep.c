@@ -18,17 +18,17 @@ int *gen_rand_std(int n)
 
 int *neighbor(int* s)
 {
- big *new = malloc(100*sizeof(big));
+ int *new = malloc(100*sizeof(int));
  
  //fill in new with s
- int i;
+ int i,j;
  for(i = 0; i < 100; i++){
    new[i] = s[i];
  }
 
  //choose two random indices between 0 and  100
- int i = rand() % 100;
- int j = rand() % 100;
+ i = rand() % 100;
+ j = rand() % 100;
 
  //switch s[i], s[j] with probability 1/2
  new[i]*= (2*(rand() % 2) - 1); 

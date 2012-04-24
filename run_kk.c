@@ -79,7 +79,7 @@ big run_kk(big *list, int flag, int rep)
     }
     else
     {
-      int *t = gen_ran_alt(100);
+      int *t = gen_rand_alt(100);
       big *processed = preprocess(t, list);
       residue = kar(processed);
 
@@ -88,7 +88,7 @@ big run_kk(big *list, int flag, int rep)
          //perturb our position in solution space
 	 int *s = altneighbor(t);
 	 big *newprocessed = preprocess(s, list);
-	 r = kar(newpreprocessed);
+	 big r = kar(newprocessed);
 	 
          //if it's lower, replace s with t and swtich the residues
 	 if(r<residue)

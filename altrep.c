@@ -43,6 +43,30 @@ big *preprocess(int *partitionnumbers, big *list)
 }
 
 
+int *altneighbor(int *s){
+
+int *new = malloc(100*sizeof(int));
+
+//copy s
+int i;
+for(i = 0; i < 100; i++)
+  new[i] = s[i];
+
+//choose a random position
+int pos = rand() % 100;
+
+//choose a random perturbation
+int perturb = (rand() % 99) + 1;
+
+new[pos] = (new[pos] +  perturb) % 100;
+
+return new;
+
+}
+
+
+
+
 //Binary Heap Stuff
 
 //Throughout, A is an array implementing our heap
