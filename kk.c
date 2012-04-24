@@ -7,6 +7,7 @@
 
 big run_kk(big* list,int flag, int rep);
 big *gen(big *list, int n);
+big kar(big *list);
 
 int
 main(int argc, char *argv[])
@@ -45,6 +46,7 @@ main(int argc, char *argv[])
     for (i=0;i<6;i++)
       res[i] = 0;
 
+    big kres = 0;
     list = malloc(100*sizeof(big));
     for(i=0;i<50;i++)
     {
@@ -56,10 +58,12 @@ main(int argc, char *argv[])
 	  res[3*rep+flag]+=run_kk(list,flag,rep);
 	}
       }
+      kres += kar(list);
     }
     for (i=0;i<6;i++)
       res[i] = res[i]/50;
 
+    kres = kres/50;
 
     printf("Rep: std, Mode: rep. rand. --> avg. result: %llu\n",res[0]);
     printf("Rep: std, Mode: hill climb --> avg. result: %llu\n",res[1]);
@@ -67,6 +71,7 @@ main(int argc, char *argv[])
     printf("Rep: alt, Mode: rep. rand. --> avg. result: %llu\n",res[3]);
     printf("Rep: alt, Mode: hill climb --> avg. result: %llu\n",res[4]);
     printf("Rep: alt, Mode: sim. anneal --> avg. result: %llu\n",res[5]);
+    printf("Regular Karm-Karp --> avg. result: %llu\n", kres);
   }
 
 
