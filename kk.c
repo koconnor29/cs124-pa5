@@ -3,7 +3,6 @@
 #include <time.h>
 #include <math.h>
 
-#define max_iter 2
 #define big long long
 
 big run_kk(big* list,int flag, int rep);
