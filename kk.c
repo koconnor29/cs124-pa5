@@ -36,7 +36,7 @@ main(int argc, char *argv[])
       fscanf(fp,"%llu\n",&list[i]);
     }
 
-    result = run_kk(list,flag,rep);
+    result = kar(list);
     printf("Residue: %llu\n",result);
   }
 
@@ -80,14 +80,10 @@ main(int argc, char *argv[])
     list = malloc(100*sizeof(big));
     flag = atoi(argv[2]);
     rep = atoi(argv[3]);
-    if (flag == 2)
+    if (rep == 2)
     {
-      for (i=0;i<50;i++)
-      {
-        gen(list,100);
-	int j;
-        result=kar(list);
-      }
+      gen(list,100);
+      result=kar(list);
     }
     for (i=0;i<50;i++)
     {
@@ -97,6 +93,8 @@ main(int argc, char *argv[])
     result = result/50; 
     printf("Avg. Residue: %llu\n",result);
   }
+
+
   free(list);
   return 0;
 

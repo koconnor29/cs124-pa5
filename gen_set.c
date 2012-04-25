@@ -3,7 +3,7 @@
 #include<time.h>
 
 #define big long long
-big *gen(int n);
+big *gen(big *list, int n);
 
 int
 main(int argc, char *argv[])
@@ -17,7 +17,8 @@ main(int argc, char *argv[])
 
   int n = atoi(argv[1]);
   int j;
-  big *list = gen(n);
+  big *list = malloc(100*sizeof(big));
+  gen(list, n);
   FILE *fp = fopen("set.txt","w");
   for (j=0;j<n;j++)
     fprintf(fp,"%llu\n",list[j]);
