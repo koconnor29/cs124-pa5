@@ -15,7 +15,7 @@ main(int argc, char *argv[])
   srand(time(NULL));
   int i,j;
 
-  big result;
+  big result = 0;
 
   if (argc!=2 && argc!=3 && argc!=4)
   {
@@ -78,13 +78,24 @@ main(int argc, char *argv[])
   if (argc==4)
   {
     list = malloc(100*sizeof(big));
-    gen(list,100);
-
     flag = atoi(argv[2]);
     rep = atoi(argv[3]);
-
-    result = run_kk(list,flag,rep);
-    printf("Residue: %llu\n",result);
+    if (flag == 2)
+    {
+      for (i=0;i<50;i++)
+      {
+        gen(list,100);
+	int j;
+        result=kar(list);
+      }
+    }
+    for (i=0;i<50;i++)
+    {
+      gen(list,100);
+      result += run_kk(list,flag,rep);
+    }
+    result = result/50; 
+    printf("Avg. Residue: %llu\n",result);
   }
   free(list);
   return 0;

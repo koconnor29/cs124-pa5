@@ -16,18 +16,19 @@ big run_kk(big *list, int flag, int rep)
   // repeated random
   if (flag == 0)
   {
+    int *t = malloc(100*sizeof(int));     
     if (rep==0)
     {
       for (i=0;i<max_iter;i++)
       {
-        int *t = gen_rand_std(100);
+        gen_rand_std(t,100);
 	big r = compute_res(t,list);
 	if (r<residue)
 	{
 	  residue = r;
 	}
-	free(t);
       }
+      free(t);
     }
 
   }
@@ -36,34 +37,36 @@ big run_kk(big *list, int flag, int rep)
     if (rep == 0)
     {
        //generate a single random collection of signs
-       int *t = gen_rand_std(100);
+       int *t = malloc(100*sizeof(int));
+       gen_rand_std(t,100);
        residue = compute_res(t, list);
+       int *s = malloc(100*sizeof(int));
+       int *temp;
        for (i = 0; i < max_iter; i++)
        {
          //create a neighbor of t and calculate its residue
-         int *s =  neighbor(t);
+         neighbor(s,t);
 	 big r = compute_res(s, list);
 
          //if it's lower, replace s with t and swtich the residues
 	 if(r<residue)
 	 {
-           free(t);
+	   temp  = t;
 	   t = s;
+	   s = temp;
 	   residue = r;
 	 }
          else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
 	 {
-           free(t);
+           temp = t;
 	   t = s;
+	   s = temp;
 	   //if we hit the required probability, via chance(), 
 	   //replace t with s anyways
 	 }
-	 else
-	 {
-	   free(s);
-	 }//we don't switch
        }
        free(t);
+       free(s);
     }
   }
 
@@ -71,49 +74,51 @@ big run_kk(big *list, int flag, int rep)
   {
     if (flag == 0)
     {
+      int *t = malloc(100*sizeof(int));
       for (i=0;i<max_iter;i++)
       {
-        int *t = gen_rand_alt(100);
+        gen_rand_alt(t,100);
         big *processed = preprocess(t,list);
         big r = kar(processed);
 	if (r<residue)
 	  residue = r;
-        free(t);
       }
+      free(t);
     }
     else
     {
-      int *t = gen_rand_alt(100);
+      int *t = malloc(100*sizeof(int));
+      gen_rand_alt(t,100);
       big *processed = preprocess(t, list);
       residue = kar(processed);
-
+      int *s = malloc(100*sizeof(int));
+      int *temp;
       for(i = 0; i < max_iter; i++)
       {
          //perturb our position in solution space
-	 int *s = altneighbor(t);
+	 altneighbor(s,t);
 	 big *newprocessed = preprocess(s, list);
 	 big r = kar(newprocessed);
 	 
          //if it's lower, replace s with t and swtich the residues
 	 if(r<residue)
 	 {
-           free(t);
+	   temp = t;
 	   t = s;
+	   s = temp;
 	   residue = r;
 	 }
          else if(flag == 2 && chance(r, residue, i) == 1) //for simulated annealing
 	 {
-           free(t);
+           temp = t;
 	   t = s;
+	   s = temp;
 	   //if we hit the required probability, via chance(), 
 	   //replace t with s anyways
 	 }
-	 else
-	 {
-	   free(s);
-	 }//we don't switch
       }
       free(t);
+      free(s);
     }
   }
 

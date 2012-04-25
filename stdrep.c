@@ -4,10 +4,9 @@
 #define big long long
 
 
-int *gen_rand_std(int n)
+int *gen_rand_std(int *s, int n)
 {
   //generate n (100) random plus or minus 1s
-  int *s = malloc(n*sizeof(int));
   int i;
   for (i=0;i<n;i++)
     s[i] = 2*(rand() % 2) - 1;
@@ -16,9 +15,8 @@ int *gen_rand_std(int n)
 }
 
 
-int *neighbor(int* s)
+int *neighbor(int *new, int* s)
 {
- int *new = malloc(100*sizeof(int));
  
  //fill in new with s
  int i,j;

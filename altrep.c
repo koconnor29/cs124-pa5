@@ -5,9 +5,8 @@
 
 
 #define big long long
-int *gen_rand_alt(int n)
+int *gen_rand_alt(int *s, int n)
 {
-  int *s = malloc(n*sizeof(int));
   int i;
   for (i=0;i<n;i++)
     s[i] = (rand() % n);
@@ -43,9 +42,7 @@ big *preprocess(int *partitionnumbers, big *list)
 }
 
 
-int *altneighbor(int *s){
-
-int *new = malloc(100*sizeof(int));
+int *altneighbor(int *new, int *s){
 
 //copy s
 int i;
